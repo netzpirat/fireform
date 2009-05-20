@@ -1,0 +1,29 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+.fireform-load {
+	list-style-image: url("chrome://fireform/skin/images/load.png");
+}
+
+.fireform-save {
+	list-style-image: url("chrome://fireform/skin/images/save.png");
+}
+
+.fireform-reset {
+	list-style-image: url("chrome://fireform/skin/images/reset.png");
+}
+
+.fireform-delete {
+	list-style-image: url("chrome://fireform/skin/images/delete.png");
+}
+
+.fireform-preferences {
+	list-style-image: url("chrome://fireform/skin/images/config.png");
+}
+
+.fireform-user {
+	list-style-image: url("chrome://fireform/skin/images/user.png");
+}
+
+.fireform-help {
+	list-style-image: url("chrome://fireform/skin/images/help.png");
+}

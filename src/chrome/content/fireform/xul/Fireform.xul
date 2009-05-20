@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is from fireform.
+   -
+   - The Initial Developer of the Original Code is
+   - Michael Kessler, Bluewin AG <michael.kessler@team.bluewin.com>.
+   - Portions created by the Initial Developer are Copyright (C) 2003
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://fireform/skin/fireform.css" type="text/css"?>
+
+<!-- load localized strings (entities) -->
+<!DOCTYPE window SYSTEM "chrome://fireform/locale/fireform.dtd">
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<!-- include js code -->
+	<script type="application/x-javascript" src="chrome://fireform/content/js/Fireform.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/util/StringBundle.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/Preferences.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/PreferencesService.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/BooleanPreference.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/ListPreference.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/UserListPreference.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/RegExpListPreference.js"/>	
+	<script type="application/x-javascript">
+		var fireform = new Fireform();
+	</script>
+	
+	<!-- define the toolbar palatte -->
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="fireform-button-load-form" label="&button.load;" class="fireform-load" oncommand="fireform.loadForm()"/>
+		<toolbarbutton id="fireform-button-save-form" label="&button.save;" class="fireform-save" oncommand="fireform.saveForm()"/>
+		<toolbarbutton id="fireform-button-reset-form" label="&button.reset;" class="fireform-reset" oncommand="fireform.resetForm()"/>
+		<toolbarbutton id="fireform-button-delete-form" label="&button.delete;" class="fireform-delete" oncommand="fireform.deleteForm()"/>
+		<toolbarbutton id="fireform-button-preferences" label="&button.preferences;" class="fireform-preferences" oncommand="fireform.openPreferences()"/>
+		<toolbarbutton id="fireform-button-user-select" label="&button.user;" type="menu" class="fireform-user">
+			<menupopup id="fireform-button-user-select-pop" onpopupshowing="fireform.createUserMenu(this)">
+			</menupopup>
+		</toolbarbutton>
+		<toolbarbutton id="fireform-button-help" label="&button.help;" class="fireform-help" oncommand="fireform.openHelp()"/>
+	</toolbarpalette>
+	
+	<!-- define toolbar with default palette set -->
+	<toolbox id="navigator-toolbox">
+		<toolbar id="fireform-toolbar" toolbarname="Fireform" customizable="true" hidden="false" context="toolbar-context-menu" inherits="collapsed,hidden" persist="collapsed,hidden"
+				 defaultset="fireform-button-load-form,fireform-button-save-form,fireform-button-reset-form,fireform-button-delete-form,fireform-button-preferences,fireform-button-user-select,fireform-button-help">
+		</toolbar>
+	</toolbox>
+			
+	<!-- the popupmenu within firefox's tool menu -->
+	<menupopup id="menu_ToolsPopup" position="1">
+		<menu label="Fireform" accesskey="F">
+			<menupopup>
+				<menuitem label="&menu.load;" accesskey="L" oncommand="fireform.loadForm()"/>
+				<menuitem label="&menu.save;" accesskey="S" oncommand="fireform.saveForm()"/>
+				<menuitem label="&menu.reset;" accesskey="R" oncommand="fireform.resetForm()"/>
+				<menuitem label="&menu.delete;" accesskey="D" oncommand="fireform.deleteForm()"/>
+				<menuitem label="&menu.preferences;" accesskey="P" oncommand="fireform.openPreferences()"/>
+				<menuitem label="&menu.help;" accesskey="H" oncommand="fireform.openHelp()"/>
+			</menupopup>
+		</menu>
+	</menupopup>
+	
+</overlay>

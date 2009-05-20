@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is from fireform.
+   -
+   - The Initial Developer of the Original Code is
+   - Michael Kessler, Bluewin AG <michael.kessler@team.bluewin.com>.
+   - Portions created by the Initial Developer are Copyright (C) 2003
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+<!DOCTYPE window SYSTEM "chrome://fireform/locale/fireform.dtd">
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" 
+	id="fireform-pref-dialog" buttons="accept" width="800" height="500" minwidth="800" minheight="500" 
+	title="&dialog.title;" onload="preferences.load();">
+	<script type="application/x-javascript" src="chrome://fireform/content/js/util/StringBundle.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/Preferences.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/PreferencesService.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/BooleanPreference.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/ListPreference.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/UserListPreference.js"/>
+	<script type="application/x-javascript" src="chrome://fireform/content/js/preferences/elements/RegExpListPreference.js"/>
+	<script type="application/x-javascript"> var preferences = new Preferences(); </script>
+	<hbox flex="1">
+		<vbox flex="1">
+			<!-- USERS -->
+			<vbox flex="1">
+				<groupbox id="prefAutoformUsers" flex="1" minwidth="150">
+					<caption label="&users.virtual;"/>
+					<listbox id="fireform-userList" flex="1" onselect="preferences.getPreference('fireform-userList').changeUser(this);" seltype="single">
+					</listbox>
+					<button label="&users.add;" 
+						oncommand="preferences.getPreference('fireform-userList').addEntry();"/>
+					<button label="&users.edit;" 
+						oncommand="preferences.getPreference('fireform-userList').editEntry();"/>
+					<button label="&users.remove;" 
+						oncommand="preferences.getPreference('fireform-userList').removeEntry();"/>
+				</groupbox>
+			</vbox>
+		</vbox>
+		<vbox flex="10">
+			<!-- USERS SETTINGS-->
+			<tabbox flex="1" id="fireform-tabbox">
+				<tabs>
+					<tab label="&tab.general;"/>
+					<tab label="&tab.context;"/>
+					<tab label="&tab.autoload;"/>
+					<tab label="&tab.autosave;"/>
+					<tab label="&tab.edit;"/>
+				</tabs>
+				<!-- GENERAL -->
+				<tabpanels flex="1">
+					<tabpanel id="fireform-pref-general" flex="1">
+						<grid flex="1">
+							<columns>
+								<column flex="1"/>
+								<column flex="1"/>
+							</columns>
+							<rows>
+								<row flex="1">
+									<!-- AUTOMATION -->
+									<groupbox id="prefAutoformAutomation" flex="1">
+										<caption label="&general.automation;"/>
+										<grid>
+											<rows>
+												<row>
+													<checkbox id="fireform-autosave" label="&general.autosave;" 
+														oncommand="preferences.getPreference(this).saveElement();" />
+												</row>
+												<row>
+													<checkbox id="fireform-autoload" label="&general.autoload;" 
+														oncommand="preferences.getPreference(this).saveElement();" />
+												</row>
+												<row>
+													<checkbox id="fireform-visualize" label="&actions.visualize;" 
+														oncommand="preferences.getPreference(this).saveElement();" />
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+									<!-- PASSWORD -->
+									<groupbox id="prefAutoformPassword" flex="1">
+										<caption label="&general.password;"/>
+										<grid>
+											<rows>
+												<row>
+													<checkbox id="fireform-savepasswords" label="&general.savepass;" 
+														oncommand="preferences.getPreference(this).saveElement();" />
+												</row>
+												<row>
+													<checkbox id="fireform-encryptpasswords" label="&general.encrypt;" 
+														oncommand="doPlainTextWarning();" />
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+								</row>
+								<row flex="1">
+									<!-- ACTIONS -->
+									<groupbox id="prefAutoformActions" flex="1">
+										<caption label="&actions.actions;"/>
+										<grid>
+											<rows>
+												<row>
+													<checkbox id="fireform-overwrite" label="&actions.overwrite;" 
+														oncommand="preferences.getPreference(this).saveElement();" />
+												</row>
+												<row>
+													<checkbox id="fireform-emptyvalues" label="&actions.saveempty;" 
+														oncommand="preferences.getPreference(this).saveElement();" />
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+									<!-- HOMEPAGE -->
+									<groupbox id="prefAutoformHomepage" flex="1">
+										<caption label="&actions.home;"/>
+										<grid>
+											<rows>
+												<row>
+													<description flex="1"> &actions.homepage;: <html:a target="_new" 
+														style="color: blue" 
+														href="http://fireform.mozdev.org/">http://fireform.mozdev.org/</html:a></description>
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+					<!-- FIELD CONTEXT -->
+					<tabpanel id="fireform-pref-field-hash" flex="1">
+						<!-- HASH -->
+						<hbox flex="1">
+							<groupbox id="prefAutoformFieldContext" flex="1">
+								<caption label="&context.field;"/>
+								<description flex="1"> &context.consider;</description>
+								<spacer height="20"/>
+								<description flex="1"> &context.shouldhave;</description>
+								<spacer height="10"/>
+								<checkbox id="fireform-hash-hostname" label="&context.hostname;" 
+									oncommand="preferences.getPreference(this).saveElement();"/>
+								<checkbox id="fireform-hash-pathname" label="&context.pathname;" 
+									oncommand="preferences.getPreference(this).saveElement();"/>
+								<checkbox id="fireform-hash-search" label="&context.querystring;" 
+									oncommand="preferences.getPreference(this).saveElement();"/>
+								<checkbox id="fireform-hash-form" label="&context.formname;" 
+									oncommand="preferences.getPreference(this).saveElement();"/>
+								<spacer flex="10"/>
+							</groupbox>
+						</hbox>
+						<hbox flex="1">
+							<groupbox id="prefAutoformExcludeQueryString" flex="1">
+								<caption label="&context.exclude;"/>
+								<description>&context.excludeDesc; &auto.regexp;</description>
+								<listbox id="fireform-excludeParameterList" flex="1">
+								</listbox>
+								<button label="&auto.add;" 
+									oncommand="preferences.getPreference('fireform-excludeParameterList').addEntry();"/>
+								<button label="&auto.edit;" 
+									oncommand="preferences.getPreference('fireform-excludeParameterList').editEntry();"/>
+								<button label="&auto.remove;" 
+									oncommand="preferences.getPreference('fireform-excludeParameterList').removeEntry();"/>
+							</groupbox>
+						</hbox>
+					</tabpanel>
+					<!-- AUTO LOAD URLS -->
+					<tabpanel id="fireform-pref-autoload" flex="1">
+						<!-- NEVER LOAD -->
+						<hbox flex="1">
+							<groupbox id="prefAutoformAutoloadNever" flex="1">
+								<caption label="&autoload.never;"/>
+								<description>&autoload.checkon; &auto.regexp;</description>
+								<listbox id="fireform-loadNeverList" flex="1">
+								</listbox>
+								<button label="&auto.add;" 
+									oncommand="preferences.getPreference('fireform-loadNeverList').addEntry();"/>
+								<button label="&auto.edit;" 
+									oncommand="preferences.getPreference('fireform-loadNeverList').editEntry();"/>
+								<button label="&auto.remove;" 
+									oncommand="preferences.getPreference('fireform-loadNeverList').removeEntry();"/>
+								<groupbox id="prefAutoformAutoloadNeverTest" flex="1">
+									<caption label="&auto.test;"/>
+									<label id="statusNeverLoad" control="loadNeverTestBox" value="&auto.notmatch;"/>
+									<textbox id="loadNeverTestBox" 
+										oninput="doCheckRegexp('loadNeverTestBox','fireform-loadNever', 'statusNeverLoad');"/>
+								</groupbox>
+							</groupbox>
+						</hbox>
+						<!-- ALWAYS LOAD -->
+						<hbox flex="1">
+							<groupbox id="prefAutoformAutoloadAlways" flex="1">
+								<caption label="&autoload.always;"/>
+								<description>&autoload.checkoff; &auto.regexp;</description>
+								<listbox id="fireform-loadAlwaysList" flex="1">
+								</listbox>
+								<button label="&auto.add;" 
+									oncommand="preferences.getPreference('fireform-loadAlwaysList').addEntry();"/>
+								<button label="&auto.edit;" 
+									oncommand="preferences.getPreference('fireform-loadAlwaysList').editEntry();"/>
+								<button label="&auto.remove;" 
+									oncommand="preferences.getPreference('fireform-loadAlwaysList').removeEntry();"/>
+								<groupbox id="prefAutoformAutoloadAlwaysTest" flex="1">
+									<caption label="&auto.test;"/>
+									<label id="statusAlwaysLoad" control="loadAlwaysTestBox" value="&auto.notmatch;"/>
+									<textbox id="loadAlwaysTestBox" 
+										oninput="doCheckRegexp('loadAlwaysTestBox','fireform-loadAlways', 'statusAlwaysLoad');"/>
+								</groupbox>
+							</groupbox>
+						</hbox>
+					</tabpanel>
+					<!-- AUTO SAVE URLS -->
+					<tabpanel id="fireform-pref-autosave" flex="1">
+						<!-- NEVER SAVE -->
+						<hbox flex="1">
+							<groupbox id="prefAutoformAutosaveNever" flex="1">
+								<caption label="&autosave.never;"/>
+								<description>&autosave.checkon; &auto.regexp;</description>
+								<listbox id="fireform-saveNeverList" flex="1">
+								</listbox>
+								<button label="&auto.add;" 
+									oncommand="preferences.getPreference('fireform-saveNeverList').addEntry();"/>
+								<button label="&auto.edit;" 
+									oncommand="preferences.getPreference('fireform-saveNeverList').editEntry();"/>
+								<button label="&auto.remove;" 
+									oncommand="preferences.getPreference('fireform-saveNeverList').removeEntry();"/>
+								<groupbox id="prefAutoformAutosaveNeverTest" flex="1">
+									<caption label="&auto.test;"/>
+									<label id="statusNeverSave" control="saveNeverTestBox" value="&auto.notmatch;"/>
+									<textbox id="saveNeverTestBox" 
+										oninput="doCheckRegexp('saveNeverTestBox','fireform-saveNever', 'statusNeverSave');"/>
+								</groupbox>
+							</groupbox>
+						</hbox>
+						<!-- ALWAYS SAVE -->
+						<hbox flex="1">
+							<groupbox id="prefAutoformAutosaveAlways" flex="1">
+								<caption label="&autosave.always;"/>
+								<description>&autosave.checkoff; &auto.regexp;</description>
+								<listbox id="fireform-saveAlwaysList" flex="1">
+								</listbox>
+								<button label="&auto.add;" 
+									oncommand="preferences.getPreference('fireform-saveAlwaysList').addEntry();"/>
+								<button label="&auto.edit;" 
+									oncommand="preferences.getPreference('fireform-saveAlwaysList').editEntry();"/>
+								<button label="&auto.remove;" 
+									oncommand="preferences.getPreference('fireform-saveAlwaysList').removeEntry();"/>
+								<groupbox id="prefAutoformAutosaveAlwaysTest" flex="1">
+									<caption label="&auto.test;"/>
+									<label id="statusAlwaysSave" control="saveAlwaysTestBox" value="&auto.notmatch;"/>
+									<textbox id="saveAlwaysTestBox" 
+										oninput="doCheckRegexp('saveAlwaysTestBox','fireform-saveAlways', 'statusAlwaysSave');"/>
+								</groupbox>
+							</groupbox>
+						</hbox>
+					</tabpanel>
+					<!-- EDIT FIELD VALUES -->
+					<tabpanel id="fireform-pref-edit-values" flex="1">
+						<groupbox id="prefAutoformAutosaveAlways" flex="1">
+							<caption label="&edit.title;"/>
+							<tree id="fireform-prefs-tree" seltype="multiple" flex="1" class="plain" 
+								context="contextMenu">
+								<treecols>
+									<treecol id="fireform-prefs-name" label="&pref.name;" flex="7" 
+										class="sortDirectionIndicator" persist="hidden width sortActive sortDirection" 
+										primary="true" />
+									<splitter class="tree-splitter" />
+									<treecol id="fireform-prefs-type" label="&pref.type;" flex="10" 
+										class="sortDirectionIndicator" persist="hidden width sortActive sortDirection"/>
+									<treecol id="fireform-prefs-value" label="&pref.value;" flex="10" 
+										class="sortDirectionIndicator" persist="hidden width sortActive sortDirection"/>
+								</treecols>
+								<treechildren id="fireform-pref-edit-children"/>
+							</tree>
+							<vbox>
+								<grid flex="1">
+									<columns>
+										<column flex="1"/>
+									</columns>
+									<rows>
+										<row>
+											<button label="&pref.editEntry;" oncommand="doEditEntry();" flex="1"/>
+										</row>
+									</rows>
+								</grid>
+							</vbox>
+							<progressmeter mode="determined" value="50%" id="fireform-pref-progress"/>
+						</groupbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+		</vbox>
+	</hbox>
+</dialog>

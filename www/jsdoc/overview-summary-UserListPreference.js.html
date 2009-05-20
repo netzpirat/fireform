@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+fireform Overview
+</TITLE>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
+<SCRIPT>
+function asd()
+{
+parent.document.title=" Overview";
+}
+</SCRIPT>
+</HEAD>
+<BODY BGCOLOR="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<A NAME="navbar_top"><!-- --></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3">
+  <TR ALIGN="center" VALIGN="top">
+  
+  
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><b>Overview</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">	&nbsp;<FONT CLASS="NavBarFont1Rev"><b>File</b></FONT>&nbsp;</TD>
+  
+
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1"> 	<FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><b>Tree</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"--><FONT CLASS="NavBarFont1"><b>Index</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><b>Help</b></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD BGCOLOR="#EEEEFF" ALIGN="right" VALIGN="top">
+<EM>
+<b>fireform</b></EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="overview-summary.html" TARGET="_top"><B>NO FRAMES</B></A>
+&nbsp;&nbsp;
+<SCRIPT>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>
+</NOSCRIPT>
+</FONT></TD>
+</TR>
+</TABLE>
+<!-- =========== END OF NAVBAR =========== -->
+
+<HR>
+<CENTER>
+
+   <H2>UserListPreference.js</H2>
+
+</CENTER>
+<table>
+	<tr>
+		<td valign="top">
+                        
+                            
+                        
+			
+			<h4>Summary</h4>
+			<p>
+                        
+                           No overview generated for 'UserListPreference.js'<BR/><BR/>
+                           
+			</p>
+		</td>
+	</tr>
+</table>
+
+<HR>
+
+
+
+
+<!-- START SOURCECODE -->
+<pre class="sourceview">
+<span class="comment">/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is from fireform.
+ *
+ * The Initial Developer of the Original Code is
+ * Michael Kessler, Bluewin AG &lt;michael.kessler<span class="attrib">@team</span>.bluewin.com&gt;.
+ * Portions created by the Initial Developer are Copyright (C) 2005
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */</span>
+
+<span class="comment">/**
+ * Manages virtual users (toolbar
+ * userchange and preferences
+ *
+ * <span class="attrib">@param</span> elementId the xul element id in the dialog
+ *
+ * <span class="attrib">@constructor</span>
+ */</span>
+<span class="reserved">function</span> UserListPreference(elementId) {
+<span class="comment">
+   // inherit</span>
+   <span class="reserved">this</span>.superclass = ListPreference;
+   <span class="reserved">this</span>.superclass();
+   
+   <span class="reserved">this</span>.elementId = elementId;
+
+   <span class="comment">/**
+    * put preference values to
+    * its gui representation
+    * 
+    * overwrites ListPreference.loadElement()
+    */</span>
+   <span class="reserved">this</span>.loadElement = <span class="reserved">function</span>() {
+<span class="comment">      // remove onselelect from the listbox</span>
+<span class="comment">      // otherwise it will trigger a this.changeUser()</span>
+      var listBox = document.getElementById(<span class="reserved">this</span>.elementId);
+      var onSelectHandler = listBox.onselect;
+      listBox.onselect = null;
+<span class="comment">      // clear list</span>
+      <span class="reserved">while</span>(listBox.getRowCount() != 0) {
+         listBox.removeItemAt(0);
+      }
+<span class="comment">      // load values</span>
+      var prefs = <span class="reserved">this</span>.getListBranch();
+      var count = { value : 0 };
+      var childList = prefs.getChildList(<span class="literal">""</span>, count);      
+      <span class="reserved">for</span>(i=0; i&lt;count.value; i++) {
+         var item = listBox.appendItem(prefs.getCharPref(childList[i]), childList[i]);
+         <span class="reserved">if</span> (childList[i] == <span class="reserved">this</span>.getActiveUser()) {
+            listBox.selectItem(item);
+         }
+      }
+<span class="comment">      // restore this.changeUser()</span>
+      listBox.onselect = onSelectHandler;
+   };
+   
+   <span class="comment">/**
+    * user change  within the preferences dialog.
+    * the preference observer triggers the reload
+    * of all elements 
+    */</span>
+   <span class="reserved">this</span>.changeUser = <span class="reserved">function</span>(listBox) {
+      <span class="reserved">if</span> (listBox.selectedCount &gt; 0) {
+        <span class="reserved">this</span>.getPreferenceStore().setCharPref(<span class="literal">"fireform-activeuser"</span>, listBox.selectedItem.value);
+      }
+   }
+
+   <span class="comment">/**
+    * returns the list branch
+    *
+    * Overwrites ListPreference.getListBranch()
+    */</span>
+   <span class="reserved">this</span>.getListBranch = <span class="reserved">function</span>() {
+      <span class="reserved">return</span> <span class="reserved">this</span>.getPreferenceStoreBranch(<span class="reserved">this</span>.elementId);
+   }
+   
+   <span class="comment">/**
+    * create the toolbar user menupopup
+    */</span>
+   <span class="reserved">this</span>.createUserMenu = <span class="reserved">function</span>(menu) {
+<span class="comment">      // clear menu</span>
+      var menupop = document.getElementById(menu);
+      alert(menupop);
+      <span class="reserved">for</span>(c=0; c&lt;menupop.childNodes.length; c++) {
+         menupop.removeChild(menupop.childNodes[c]);
+      }
+<span class="comment">      // create user menus</span>
+      var prefs = <span class="reserved">this</span>.getListBranch();
+      var count = { value : 0 };
+      var childList = prefs.getChildList(<span class="literal">""</span>, count);
+      <span class="reserved">for</span>(i=0; i&lt;count.value; i++) {
+         var menuitem = document.createElement(<span class="literal">"menuitem"</span>);
+         menuitem.setAttribute(<span class="literal">"label"</span>, <span class="reserved">this</span>.getUserPreferenceStore().getCharPref(childList[i]));
+         menuitem.setAttribute(<span class="literal">"id"</span>, childList[i]);
+         menuitem.setAttribute(<span class="literal">"value"</span>, childList[i]);
+         menuitem.setAttribute(<span class="literal">"type"</span>, <span class="literal">"radio"</span>);
+         menuitem.setAttribute(<span class="literal">"oncommand"</span>, <span class="literal">"toolbar.saveForm(); toolbar.changeUser(this); toolbar.loadForm();"</span>);
+         <span class="reserved">if</span>(childList[i] == <span class="reserved">this</span>.autouser) {
+            menuitem.setAttribute(<span class="literal">"checked"</span>, <span class="literal">"true"</span>);
+         }
+         menupop.appendChild(menuitem);
+      }
+   }
+   
+   <span class="comment">/**
+    * string representation
+    */</span>
+   <span class="reserved">this</span>.toString = <span class="reserved">function</span>() {
+      <span class="reserved">return</span> <span class="literal">"UserListPreference "</span> + <span class="reserved">this</span>.elementId + <span class="literal">" = "</span> + <span class="reserved">this</span>.getValueArray();
+   };
+} 
+
+</pre>
+<!-- END SOURCECODE -->
+<HR>
+
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<A NAME="navbar_top"><!-- --></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3">
+  <TR ALIGN="center" VALIGN="top">
+  
+  
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><b>Overview</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">	&nbsp;<FONT CLASS="NavBarFont1Rev"><b>File</b></FONT>&nbsp;</TD>
+  
+
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1"> <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><b>Tree</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"--><FONT CLASS="NavBarFont1"><b>Index</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><b>Help</b></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD BGCOLOR="#EEEEFF" ALIGN="right" VALIGN="top"><EM>
+<b>fireform</b></EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="overview-summary.html" TARGET="_top"><B>NO FRAMES</B></A>
+&nbsp;&nbsp;
+<SCRIPT>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>
+</NOSCRIPT>
+</FONT></TD>
+</TR>
+</TABLE>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<FONT SIZE="-1">
+
+</FONT>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/">JSDoc</a> on Thu Jan  6 23:46:30 2005</div>
+</BODY>
+</HTML>

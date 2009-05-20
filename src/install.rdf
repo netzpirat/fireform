@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+	<Description about="urn:mozilla:install-manifest">
+		
+	 	<em:name>Fireform</em:name>
+		<em:id>{8b919892-0cae-48ed-a888-27cdb37976af}</em:id>
+		<em:version>{$FIREFORMVERSION$}</em:version>
+		
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+ 				<em:minVersion>0.7</em:minVersion>
+ 				<em:maxVersion>1.0</em:maxVersion>
+ 			</Description>
+ 		</em:targetApplication>
+
+		<em:file>
+ 			<Description about="urn:mozilla:extension:file:fireform.jar">
+ 				<em:package>content/fireform/</em:package>
+ 				<em:skin>skin/classic/fireform/</em:skin>
+ 				<em:locale>locale/en_US/fireform/</em:locale>
+ 			</Description>
+ 		</em:file>
+
+		<em:description>A tool for automatic form filling</em:description>
+		<em:creator>Michael Kessler</em:creator>
+		<em:homepageURL>http://fireform.mozdev.org/</em:homepageURL>
+		
+		<em:optionsURL>chrome://fireform/content/xul/Preferences.xul</em:optionsURL>
+		<em:iconURL>chrome://fireform/skin/images/fireform.png</em:iconURL>
+		<em:updateURL>http://fireform.mozdev.org/update.rdf</em:updateURL>	
+		
+	</Description>
+</RDF>

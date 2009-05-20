@@ -1,0 +1,143 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is from fireform.
+   -
+   - The Initial Developer of the Original Code is
+   - Michael Kessler, Bluewin AG <michael.kessler@team.bluewin.com>.
+   - Portions created by the Initial Developer are Copyright (C) 2003
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!-- ==== -->
+<!-- toolbar -->
+<!-- ==== -->
+
+<!-- menu items -->
+<!ENTITY menu.viewtoolbar "Fireform toolbar">
+
+<!ENTITY menu.load "Load form data">
+<!ENTITY menu.save "Save form data">
+<!ENTITY menu.reset "Reset form data">
+<!ENTITY menu.delete "Delete form data">
+<!ENTITY menu.preferences "Open Preferences">
+<!ENTITY menu.help "Help">
+
+<!-- toolbar buttons -->
+<!ENTITY button.load "Load Form">
+<!ENTITY button.save "Save Form">
+<!ENTITY button.reset "Reset Form">
+<!ENTITY button.delete "Delete Form">
+<!ENTITY button.preferences "Preferences">
+<!ENTITY button.user "User">
+<!ENTITY button.help "Help">
+
+<!-- ========== -->
+<!-- preference dialog -->
+<!-- ========== -->
+
+<!-- title -->
+<!ENTITY dialog.title "Fireform preferences">
+
+<!-- tabs -->
+<!ENTITY tab.general "General">
+<!ENTITY tab.buttons "Toolbar buttons">
+<!ENTITY tab.context "Field context">
+<!ENTITY tab.autoload "Autoload urls">
+<!ENTITY tab.autosave "Autosave urls">
+<!ENTITY tab.edit "Edit values">
+
+<!-- general tab -->
+<!ENTITY general.automation "Automation">
+<!ENTITY general.autosave "Save form automatically">
+<!ENTITY general.autoload "Load form automatically">
+<!ENTITY general.password "Password handling">
+<!ENTITY general.savepass "Save password fields">
+<!ENTITY general.encrypt "Encrypt passwords (TripleDes)">
+
+<!-- actions tab -->
+<!ENTITY actions.actions "Actions">
+<!ENTITY actions.visualize "Visualize load/save action">
+<!ENTITY actions.overwrite "Overwrite existing values when loading">
+<!ENTITY actions.saveempty "Save empty values">
+<!ENTITY actions.home "Autoform">
+<!ENTITY actions.homepage "Homepage">
+<!ENTITY actions.alert "Error alerts">
+
+<!-- context hash tab -->
+<!ENTITY context.consider "Consider a form called 'MyForm' on a page from 'http://www.host.ch/path/page.htm?param=value'.">
+<!ENTITY context.field "Field context">
+<!ENTITY context.shouldhave "A field will be stored for the following contexts:">
+<!ENTITY context.hostname "Hostname (www.host.ch)">
+<!ENTITY context.pathname "Pathname (/path/page.htm)">
+<!ENTITY context.querystring "Querystring (?param=value)">
+<!ENTITY context.formname "Form name (MyForm)">
+<!ENTITY context.exclude "Exclude parameters">
+<!ENTITY context.excludeDesc "Specify the names of parameters to exclude from storage. This can be used to remove session ids for example.">
+
+<!-- user tab -->
+<!ENTITY users.virtual "Users">
+<!ENTITY users.tool "Tools">
+<!ENTITY users.add "Add">
+<!ENTITY users.edit "Rename">
+<!ENTITY users.remove "Remove">
+
+
+<!-- autoload tab -->
+<!ENTITY autoload.never "Never autoload from url">
+<!ENTITY autoload.checkon "The entries will be checked when autoload is on.">
+<!ENTITY autoload.always "Always autoload from url">
+<!ENTITY autoload.checkoff "The entries will be checked when autoload is off.">
+
+<!-- autosave tab -->
+<!ENTITY autosave.never "Never autosave at url">
+<!ENTITY autosave.checkon "The entries will be checked when autosave is on.">
+<!ENTITY autosave.always "Always autosave at url">
+<!ENTITY autosave.checkoff "The entries will be checked when autosave is off.">
+
+<!-- list actions -->
+<!ENTITY auto.add "Add">
+<!ENTITY auto.edit "Edit">
+<!ENTITY auto.remove "Remove">
+
+<!-- autoload & autosave tab -->
+<!ENTITY auto.test "Test url">
+<!ENTITY auto.notmatch "The url does not match!">
+<!ENTITY auto.regexp "You can enter regular expressions.">
+
+<!-- edit tab -->
+<!ENTITY edit.title "View and edit stored values">
+
+<!-- edit preferences -->
+<!ENTITY pref.name "Name">
+<!ENTITY pref.value "Value">
+<!ENTITY pref.type "Type">
+<!ENTITY pref.editEntry "Edit">
+<!ENTITY pref.removeEntry "Remove">
+
+

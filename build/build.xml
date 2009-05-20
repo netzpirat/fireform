@@ -1,0 +1,134 @@
+<!-- This is the fireform ant build system -->
+<!-- Author: Michael Kessler -->
+
+<project default="install_local" basedir="." name="Fireform">
+	
+	<property file="build.properties"/>
+	
+	<!-- release version -->
+	<property name="fireform.version"  value="1.0.0"/>
+	<property name="fireform.cversion" value="1-0-0"/>
+	
+	<!-- ========================================
+			Build fireform_VERSION.xpi 
+			This build the xpi installer archive
+
+			Param XPINAME the name of the destination xpi file
+	        ======================================== -->
+	<target name="build_xpi">
+			<delete dir="${java.io.tmpdir}/fireform"/>
+			<mkdir dir="${java.io.tmpdir}/fireform"/>
+			<mkdir dir="${java.io.tmpdir}/fireform/chrome"/>
+			<mkdir dir="${java.io.tmpdir}/fireform/defaults"/>
+			<mkdir dir="${java.io.tmpdir}/fireform/pack"/>
+			<mkdir dir="${java.io.tmpdir}/fireform/pack/chrome"/>
+			<mkdir dir="${java.io.tmpdir}/fireform/pack/defaults"/>
+
+			<!-- copy sources and set fireform version -->
+			<copy todir="${java.io.tmpdir}/fireform/chrome">
+				<fileset dir="../src/chrome">
+					<exclude name="**/*.png"/>
+				</fileset>
+	            <filterset begintoken="{$" endtoken="$}">
+	                <filter token="FIREFORMVERSION" value="${fireform.version}"/>
+	            </filterset>
+			</copy>
+
+			<!-- copy images (filterset makes them unreadable) -->
+			<copy todir="${java.io.tmpdir}/fireform/chrome/skin/classic/fireform/images">
+				<fileset dir="../src/chrome/skin/classic/fireform/images"/>
+			</copy>
+
+			<!-- zip the fireform code without CVS directory and install.js -->
+			<jar destfile="${java.io.tmpdir}/fireform/pack/chrome/fireform.jar" basedir="${java.io.tmpdir}/fireform/chrome" excludes="CVS/**"/>
+			
+			<!-- add install files -->
+			<copy file="../src/install.rdf" tofile="${java.io.tmpdir}/fireform/pack/install.rdf">
+	            <filterset begintoken="{$" endtoken="$}">
+	                <filter token="FIREFORMVERSION" value="${fireform.version}"/>
+	            </filterset>
+			</copy>
+		
+			<!-- create the xpi installer -->			
+			<zip destfile="../downloads/${XPINAME}" basedir="${java.io.tmpdir}/fireform/pack" /> 
+	</target>
+
+	<!-- ========================================
+			Update templates
+	        ======================================== -->
+	<target name="update_templates">
+		<copy todir="../www" overwrite="true">
+			<fileset dir="templates"/>
+            <filterset begintoken="{$" endtoken="$}">
+                <filter token="FIREFORMVERSION" value="${fireform.version}"/>
+            </filterset>
+		</copy>
+	</target>
+		
+	<!-- ========================================
+			Update templates
+	        ======================================== -->
+	<target name="generate_jsdoc" description="Generate JSDoc">
+		<exec dir="${jsdoc.dir}" executable="${jsdoc.bin}">
+			<arg line="-d ${basedir}/../www/jsdoc/ --package-naming --project-name fireform.mozdev.org -r ${basedir}/../src/chrome/content/fireform/js"/>
+		</exec>
+	</target>
+
+		<!-- ========================================
+			common install 
+	
+			Param:		EXECUTABLE		name of the browser executable
+						XPINAME				name of the xpi installer
+	        ======================================== -->
+	<target name="install_xpi">
+		<echo message="XPINAME: ${XPINAME}"/>
+
+		<!-- build fireform.xpi -->
+		<antcall target="build_xpi">
+			<param name="XPINAME" value="${XPINAME}"/>
+		</antcall>
+
+		<!-- browser installation -->
+		<exec executable="${firefox.bin}">
+			<arg line="${basedir}/../downloads/${XPINAME}" />
+		</exec>
+	</target>
+	
+	<!-- ========================================
+			Build and install
+	        ======================================== -->
+	<target name="install_local" description="Installs fireform.xpi locally">
+		<echo message="Install Fireform locally"/>
+		<echo message="---"/>
+		<echo message="VERSION: ${fireform.version}"/>
+		<antcall target="install_xpi">
+			<param name="XPINAME" value="fireform_development.xpi"/>
+		</antcall>
+	</target>
+	
+	<!-- ========================================
+			Release a new version
+	        ======================================== -->
+	<target name="release_fireform" description="Builds a new fireform release">
+		<echo message="Build fireform"/>
+		<echo message="---"/>
+		<echo message="VERSION: ${fireform.version}"/>
+		<echo message="CVS TAG: ${fireform.cversion}"/>
+		<echo message="Have you increased the version number?"/>
+		<sleep seconds="10"/>
+
+		<!-- build fireform_version.xpi -->
+		<antcall target="build_xpi">
+			<param name="XPINAME" value="fireform_${fireform.version}.xpi"/>
+		</antcall>
+
+		<!-- update templates -->
+		<antcall target="update_templates"/>
+
+		<!-- tag cvs -->
+		<cvs command="tag -c fireform_${fireform.cversion} ../src" cvsRoot=":pserver:kessler@cvs.mozdev.org:/cvs" failonerror="yes"/> 
+
+		<echo message="---"/>
+		<echo message="New release is ready. Please refresh the workspace, update www information and checkin manualy."/>
+</target>
+</project>

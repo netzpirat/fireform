@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+fireform Overview
+</TITLE>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
+<SCRIPT>
+function asd()
+{
+parent.document.title=" Overview";
+}
+</SCRIPT>
+</HEAD>
+<BODY BGCOLOR="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<A NAME="navbar_top"><!-- --></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3">
+  <TR ALIGN="center" VALIGN="top">
+  
+  
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><b>Overview</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">	&nbsp;<FONT CLASS="NavBarFont1Rev"><b>File</b></FONT>&nbsp;</TD>
+  
+
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1"> 	<FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><b>Tree</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"--><FONT CLASS="NavBarFont1"><b>Index</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><b>Help</b></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD BGCOLOR="#EEEEFF" ALIGN="right" VALIGN="top">
+<EM>
+<b>fireform</b></EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="overview-summary.html" TARGET="_top"><B>NO FRAMES</B></A>
+&nbsp;&nbsp;
+<SCRIPT>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>
+</NOSCRIPT>
+</FONT></TD>
+</TR>
+</TABLE>
+<!-- =========== END OF NAVBAR =========== -->
+
+<HR>
+<CENTER>
+
+   <H2>Preferences.js</H2>
+
+</CENTER>
+<table>
+	<tr>
+		<td valign="top">
+                        
+                            
+                        
+			
+			<h4>Summary</h4>
+			<p>
+                        
+                           No overview generated for 'Preferences.js'<BR/><BR/>
+                           
+			</p>
+		</td>
+	</tr>
+</table>
+
+<HR>
+
+
+
+
+<!-- START SOURCECODE -->
+<pre class="sourceview">
+<span class="comment">/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is from fireform.
+ *
+ * The Initial Developer of the Original Code is
+ * Michael Kessler, Bluewin AG &lt;michael.kessler<span class="attrib">@team</span>.bluewin.com&gt;.
+ * Portions created by the Initial Developer are Copyright (C) 2005
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */</span>
+
+<span class="comment">/**
+ * Managers the fireform preferences
+ * (observe virtual user change, load
+ * all gui elements)
+ *
+ * <span class="attrib">@constructor</span>
+ */</span>
+<span class="reserved">function</span> Preferences() {
+<span class="comment">
+   // set up all preference elements</span>
+   <span class="reserved">this</span>.preferenceArray = new Array(
+      new UserListPreference(<span class="literal">"fireform-userList"</span>),
+      new BooleanPreference(<span class="literal">"fireform-autosave"</span>, false),
+      new BooleanPreference(<span class="literal">"fireform-autoload"</span>, false),
+      new BooleanPreference(<span class="literal">"fireform-savepasswords"</span>, false),
+      new BooleanPreference(<span class="literal">"fireform-encryptpasswords"</span>, true),
+      new BooleanPreference(<span class="literal">"fireform-visualize"</span>, true),
+      new BooleanPreference(<span class="literal">"fireform-overwrite"</span>, true),
+      new BooleanPreference(<span class="literal">"fireform-emptyvalues"</span>, true),
+      new BooleanPreference(<span class="literal">"fireform-hash-hostname"</span>, false),
+      new BooleanPreference(<span class="literal">"fireform-hash-pathname"</span>, false),
+      new BooleanPreference(<span class="literal">"fireform-hash-search"</span>, false),
+      new BooleanPreference(<span class="literal">"fireform-hash-form"</span>, false),
+      new RegExpListPreference(<span class="literal">"fireform-excludeParameterList"</span>),
+      new RegExpListPreference(<span class="literal">"fireform-loadNeverList"</span>),
+      new RegExpListPreference(<span class="literal">"fireform-loadAlwaysList"</span>),
+      new RegExpListPreference(<span class="literal">"fireform-saveNeverList"</span>),
+      new RegExpListPreference(<span class="literal">"fireform-saveAlwaysList"</span>)
+   );
+<span class="comment">
+   // observe user change</span>
+   var prefChangeObserver = {
+      observe :
+      <span class="reserved">function</span>(aSubject, aTopic, aData) {
+         preferences.load();
+      }
+   };
+<span class="comment">   
+   // add observer to preference</span>
+   var query = Components.classes[<span class="literal">"@mozilla.org/preferences-service;1"</span>].getService(Components.interfaces.nsIPrefService).getBranch(<span class="literal">"extensions.fireform."</span>).QueryInterface(Components.interfaces[<span class="literal">"nsIPrefBranchInternal"</span>]);
+   query.addObserver(<span class="literal">"fireform-activeuser"</span>, prefChangeObserver, false);
+
+   <span class="comment">/**
+    * load all preferences to the gui
+    */</span>
+   <span class="reserved">this</span>.load = <span class="reserved">function</span>() {
+      <span class="reserved">for</span> (var p=0; p&lt;<span class="reserved">this</span>.preferenceArray.length; p++) {
+         var pref = <span class="reserved">this</span>.preferenceArray[p];
+         pref.loadElement();
+      }   
+   };
+   
+   <span class="comment">/**
+    * returns a preference object by 
+    * element or by element id
+    */</span>
+   <span class="reserved">this</span>.getPreference = <span class="reserved">function</span>(element) {
+      <span class="reserved">for</span> (var p=0; p&lt;<span class="reserved">this</span>.preferenceArray.length; p++) {
+         var prefElement = <span class="reserved">this</span>.preferenceArray[p];
+         <span class="reserved">if</span> (element.id) {
+            <span class="reserved">if</span> (prefElement.elementId == element.id) {
+               <span class="reserved">return</span> prefElement;
+            }
+         } <span class="reserved">else</span> {
+            <span class="reserved">if</span> (prefElement.elementId == element) {
+               <span class="reserved">return</span> prefElement;
+            }
+         }
+      }   
+   }
+
+   <span class="comment">/**
+    * string representation
+    */</span>
+   <span class="reserved">this</span>.toString = <span class="reserved">function</span>() {
+      <span class="reserved">return</span> <span class="literal">"Fireform Preferences"</span>;
+   };   
+}
+</pre>
+<!-- END SOURCECODE -->
+<HR>
+
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<A NAME="navbar_top"><!-- --></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3">
+  <TR ALIGN="center" VALIGN="top">
+  
+  
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><b>Overview</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">	&nbsp;<FONT CLASS="NavBarFont1Rev"><b>File</b></FONT>&nbsp;</TD>
+  
+
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1"> <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><b>Tree</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"--><FONT CLASS="NavBarFont1"><b>Index</b></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><b>Help</b></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD BGCOLOR="#EEEEFF" ALIGN="right" VALIGN="top"><EM>
+<b>fireform</b></EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="overview-summary.html" TARGET="_top"><B>NO FRAMES</B></A>
+&nbsp;&nbsp;
+<SCRIPT>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>
+</NOSCRIPT>
+</FONT></TD>
+</TR>
+</TABLE>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<FONT SIZE="-1">
+
+</FONT>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/">JSDoc</a> on Thu Jan  6 23:46:30 2005</div>
+</BODY>
+</HTML>
